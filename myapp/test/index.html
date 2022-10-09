@@ -14,31 +14,12 @@
 			tx.executeSql('INSERT INTO CLA (id, class,name) VALUES (3, "Third","Ronaldo")');
 			tx.executeSql('INSERT INTO CLA (id, class,name) VALUES (4, "Fourth","Sachin")');
 			
-			msg = `
-
-<p>Class message created and row inserted.</p>
-
-`;
-			document.querySelector('#status').innerHTML = msg;
 		})
 
 		gfgDb.transaction(function (tx) {
 			tx.executeSql('SELECT * FROM CLA', [], function (tx, results) {
 			var len = results.rows.length, i;
-			msg = `
-
-<p>Found rows: " + len + "</p>
-
-`;
-			document.querySelector('#status').innerHTML += msg;
-		
-			for (i = 0; i < len; i++) {
-				msg = `
-<p><b>" + results.rows.item(i).class + "</b></p>
-
-`;
-				document.querySelector('#status').innerHTML += msg;
-			}
+			
 			}, null);
 		});
 	</script>
