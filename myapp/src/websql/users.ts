@@ -1,4 +1,3 @@
-import { rejects } from "assert";
 import { Student } from "./types";
 
 const DB_NAME = "mydb";
@@ -79,10 +78,6 @@ export const saveStudent = ({ age, id, name }: Student) => {
 
 export const getStudent = (search: string = "", limit = 20, page = 1) => {
   const offset = (page - 1) * limit;
-  let query = `SELECT * FROM STUDENTS  LIMIT ${limit} OFFSET ${offset} `;
-  if (search) {
-    query = `SELECT * FROM STUDENTS where name like '%${search}%' LIMIT ${limit} OFFSET ${offset} `;
-  }
 
   return new Promise<SQLResultSet>((resolve, reject) => {
     databse.transaction((transaction) => {
