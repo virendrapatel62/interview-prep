@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	
+	<script type = "text/javascript">
+		var gfgDb = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+		var msg;
+	
+		gfgDb.transaction(function (tx) {
+			tx.executeSql('CREATE TABLE IF NOT EXISTS CLA (id unique, class,name)');
+			tx.executeSql('INSERT INTO CLA (id, class,name) VALUES (1, "First","Geeks")');
+			tx.executeSql('INSERT INTO CLA (id, class,name) VALUES (2, "Second","Hazel")');
+			tx.executeSql('INSERT INTO CLA (id, class,name) VALUES (3, "Third","Ronaldo")');
+			tx.executeSql('INSERT INTO CLA (id, class,name) VALUES (4, "Fourth","Sachin")');
+			
+			msg = `
+
+<p>Class message created and row inserted.</p>
+
+`;
+			document.querySelector('#status').innerHTML = msg;
+		})
+
+		gfgDb.transaction(function (tx) {
+			tx.executeSql('SELECT * FROM CLA', [], function (tx, results) {
+			var len = results.rows.length, i;
+			msg = `
+
+<p>Found rows: " + len + "</p>
+
+`;
+			document.querySelector('#status').innerHTML += msg;
+		
+			for (i = 0; i < len; i++) {
+				msg = `
+<p><b>" + results.rows.item(i).class + "</b></p>
+
+`;
+				document.querySelector('#status').innerHTML += msg;
+			}
+			}, null);
+		});
+	</script>
+</head>
+	
+<body>
+	<div id = "status" name = "status">Status Message</div>
+</body>
+</html>
