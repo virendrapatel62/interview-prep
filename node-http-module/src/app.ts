@@ -1,14 +1,11 @@
 import http, { IncomingMessage, OutgoingMessage, request } from "http";
-import { UrlParser } from "./middlewares/url-parser";
 import { Request, RequestHandler, Response } from "./types/index";
-// import { MiddlewareFunction } from "../src/types/index";
 
 let singletonServer: http.Server | null = null;
 
 export class App {
   private server: http.Server;
   private middlewares: RequestHandler[] = [];
-
   private gets: Record<string, RequestHandler[]> = {};
 
   constructor() {
