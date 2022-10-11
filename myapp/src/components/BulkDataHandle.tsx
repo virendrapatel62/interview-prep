@@ -41,11 +41,9 @@ export const BulkDataHandler = () => {
   }, [page, search, limit]);
 
   const handleSaveStudent = () => {
-    getFakeData(50).forEach((item) => {
-      saveStudent(item).then((result) => {
-        console.log(result);
-        getStudentCount().then(setStudentCount);
-      });
+    saveStudent(getFakeData(100000)).then((result) => {
+      console.log({ rowsAffected: result.rowsAffected });
+      getStudentCount().then(setStudentCount);
     });
   };
 

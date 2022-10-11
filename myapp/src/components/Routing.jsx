@@ -5,6 +5,7 @@ import { Title } from "../utils/Title";
 import { BulkDataHandler } from "./BulkDataHandle";
 import { ForwardRef } from "./ForwardRef";
 import { FriendsOfFriend } from "./RecursiveList";
+import { UseReducer } from "./UseReducer";
 
 const Links = () => {
   return (
@@ -19,6 +20,9 @@ const Links = () => {
         </li>
         <li style={{ margin: 10 }}>
           <Link to={"/bulk-data"}>Bulk Data</Link>
+        </li>
+        <li style={{ margin: 10 }}>
+          <Link to={"/use-reducer"}>Use Reducer</Link>
         </li>
       </ul>
     </Fragment>
@@ -37,6 +41,7 @@ export const Routing = () => {
             element={<FriendsOfFriend list={friends} />}
           />
           <Route path="/bulk-data" element={<BulkDataHandler />} />
+          <Route path="/use-reducer" element={<UseReducer />} />
         </Routes>
       </BrowserRouter>
     </div>

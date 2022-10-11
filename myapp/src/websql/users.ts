@@ -1,3 +1,4 @@
+import { getFakeData } from "../data/fakeStudents";
 import { Student } from "./types";
 
 const DB_NAME = "mydb";
@@ -13,6 +14,17 @@ const QUERIES = {
   GET_COUNT: `SELECT COUNT(*) AS count FROM ${TABLE_NAME}`,
   CERATE_TABLE: `CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (${COLUMNS.id} unique, ${COLUMNS.name} , ${COLUMNS.age} )`,
   INSERT_ONE_STUDENT: `INSERT INTO ${TABLE_NAME} (${COLUMNS.id}, ${COLUMNS.name},${COLUMNS.age}) VALUES (? , ? , ?)`,
+  INSERT_MANY_STUDENT: (students: Student[]) => {
+    let query = `INSERT INTO ${TABLE_NAME} 
+    (${COLUMNS.id}, ${COLUMNS.name},${COLUMNS.age}) 
+    VALUES ${students
+      .map(({ id, name, age }) => {
+        return ` ("${id}" , "${name}" , ${age})`;
+      })
+      .join(",")}`;
+
+    return query;
+  },
   GET_STUDENTS: (limit: number, offset: number, search?: string) => {
     let query = `SELECT * FROM STUDENTS  LIMIT ${limit} OFFSET ${offset} `;
     if (search) {
@@ -60,12 +72,14 @@ export const getStudentCount = () => {
   });
 };
 
-export const saveStudent = ({ age, id, name }: Student) => {
+export const saveStudent = (students: Student[]) => {
+  const query = QUERIES.INSERT_MANY_STUDENT(students);
   return new Promise<SQLResultSet>((resolve, reject) => {
     databse.transaction((tranaction) => {
       tranaction.executeSql(
-        QUERIES.INSERT_ONE_STUDENT,
-        [id, name, age],
+        query,
+        [],
+        // [id, name, age],
         (_, result) => resolve(result),
         (_, error) => {
           reject(error);
