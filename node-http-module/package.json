@@ -7,11 +7,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "npx nodemon src/index.js"
+    "dev": "NODE_OPTIONS='--experimental-specifier-resolution=node' npx nodemon src/index.ts",
+    "watch": "tsc --watch",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^7.5.0"
+    "@faker-js/faker": "^7.5.0",
+    "@types/node": "^14.11.2",
+    "gts": "^3.1.1",
+    "typescript": "~4.7.0"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
   }
 }
