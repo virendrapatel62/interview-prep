@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 
+import styled from "styled-components";
 import { getFakeData } from "../data/fakeStudents";
 import {
   createStudentTable,
@@ -68,7 +69,7 @@ export const BulkDataHandler = () => {
   };
 
   return (
-    <Fragment>
+    <S.Wrapper>
       <div>
         <button onClick={handleSaveStudent}>Save 50 Random Students</button>
         <h5>We Have {studentCount} Records In DB</h5>
@@ -88,7 +89,7 @@ export const BulkDataHandler = () => {
           value={search}
         />
         <input
-          type="text"
+          type="number"
           placeholder="Limit"
           onChange={handleLimitChange}
           value={limit}
@@ -96,22 +97,33 @@ export const BulkDataHandler = () => {
       </div>
       <hr />
       <h4>Searching for {search}</h4>
-      <ol>
+      <S.StudentList>
         {!!studentsListSQLResultSet?.rows.length &&
           new Array(studentsListSQLResultSet.rows.length)
             .fill(null)
             .map((e, i) => {
               const student = studentsListSQLResultSet.rows.item(i);
               return (
-                <li
-                  style={{ display: "inline-flex", minWidth: 200 }}
-                  key={student?.id}
-                >
+                <S.StudentListItem key={student?.id}>
                   {(page - 1) * limit + (i + 1)} : {student?.name}
-                </li>
+                </S.StudentListItem>
               );
             })}
-      </ol>
-    </Fragment>
+      </S.StudentList>
+    </S.Wrapper>
   );
+};
+
+const S = {
+  Wrapper: styled.div`
+    padding: 10px;
+  `,
+
+  StudentList: styled.div`
+    display: flex;
+    flex-wrap: wrap;
+  `,
+  StudentListItem: styled.div`
+    flex: 0 0 20%;
+  `,
 };
