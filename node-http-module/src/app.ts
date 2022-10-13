@@ -1,3 +1,4 @@
+import "./core"; // imorting to inject methods to prorotype
 import http, { IncomingMessage, OutgoingMessage, request } from "http";
 import { Request, RequestHandler, Response } from "./types/index";
 
