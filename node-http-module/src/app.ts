@@ -20,6 +20,7 @@ export class App {
     throw new Error("App already created..");
   }
 
+  // creates a middleware and chain
   private createNextChain(
     handlers: RequestHandler[],
     request: Request,
@@ -38,6 +39,7 @@ export class App {
     return _middlewaresChainArray[0] || (() => {});
   }
 
+  // It resolves which handler to run for the url.
   getHanderResolver(
     request: Request,
     response: Response,
@@ -47,9 +49,14 @@ export class App {
     const handler = this.gets[pathName];
 
     if (handler) {
+      // if we have registered multiple handler for single url, it creats a chain
+      // using next() we can call next handler
       const _newHandler = this.createNextChain(handler, request, response);
       _newHandler();
     } else {
+      // when handler is not there
+      // no handler is registered for the url
+      // it will call next middleware or not found handler.
       next();
     }
   }
@@ -71,6 +78,7 @@ export class App {
     });
   }
 
+  // storing get handlers
   get(url: string, handler: RequestHandler) {
     if (this.gets[url]) {
       this.gets[url].push(handler);
@@ -79,6 +87,8 @@ export class App {
     }
   }
 
+  // registering middlewares
+  //they will run before get,post any other handler in every request.
   use(middleware: RequestHandler) {
     this.middlewares.push(middleware);
   }
