@@ -13,7 +13,7 @@ export class App {
     if (!singletonServer) {
       this.server = http.createServer();
       singletonServer = this.server;
-      this.run();
+      this.setupRequestListener();
       return;
     }
 
@@ -54,7 +54,8 @@ export class App {
     }
   }
 
-  private run() {
+  // will be registested on constructor to listen request.
+  private setupRequestListener() {
     this.server.on("request", (request: Request, response: Response) => {
       const requiredMiddlewares: Readonly<RequestHandler[]> = [
         this.getHanderResolver.bind(this),
