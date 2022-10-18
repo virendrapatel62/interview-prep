@@ -8,7 +8,6 @@ class LinkedListNode {
     this.prev = null;
   }
 }
-
 class LinkedList {
   constructor() {
     this.size = 0;
@@ -82,23 +81,30 @@ class LinkedList {
     }
 
     console.log(list + "END");
+    return this;
+  }
+
+  insertMany(...values) {
+    for (const value of values) {
+      this.addToLast(value);
+    }
+    return this;
+  }
+
+  removeDuplicateInSortedLinkedList() {
+    let node = this.head;
+
+    while (node.next) {
+      if (node.data == node.next.data) {
+        node.next = node.next.next;
+      } else {
+        node = node.next;
+      }
+    }
+
+    return this;
   }
 }
-
-const list = new LinkedList();
-
-list
-  .addToLast(11)
-  .addToLast(13)
-  .addToFirst(10)
-  .addToFirst(7)
-  .insert(6, 0)
-  .insert(15, 5)
-  .insert(14, 6)
-  .display();
-
-console.log({
-  head: list.head.data,
-  tail: list.tail.data,
-  size: list.size,
-});
+module.exports = {
+  LinkedList,
+};
