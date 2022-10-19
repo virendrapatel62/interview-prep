@@ -24,3 +24,11 @@ sortedList
   .display()
   .removeDuplicateInSortedLinkedList()
   .display();
+
+const list1 = new LinkedList();
+const list2 = new LinkedList();
+
+list1.insertMany(1, 3, 5, 7, 9, 10, 11, 12, 13).display();
+list2.insertMany(2, 4, 6, 8, 10, 14, 15, 16, 17).display();
+
+LinkedList.mergeTwoSortedLinkedList(list1, list2).display();
