@@ -32,3 +32,16 @@ list1.insertMany(1, 3, 5, 7, 9, 10, 11, 12, 13).display();
 list2.insertMany(2, 4, 6, 8, 10, 14, 15, 16, 17).display();
 
 LinkedList.mergeTwoSortedLinkedList(list1, list2).display();
+
+const cycleList = new LinkedList();
+cycleList.insertMany(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+cycleList.display();
+console.log(cycleList.hasCycle());
+console.log({
+  cycleCreatedAt: cycleList.createRandomCycle(),
+});
+console.log(cycleList.hasCycle());
+console.log({
+  cycleLength: cycleList.getCycleLength(),
+});

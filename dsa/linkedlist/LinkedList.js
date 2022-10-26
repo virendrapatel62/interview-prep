@@ -109,6 +109,52 @@ class LinkedList {
     return this;
   }
 
+  createRandomCycle() {
+    const index1 = Math.floor(Math.random() * this.size);
+    const node = this.getNode(index1);
+    const last = this.getNode(this.size - 1);
+    last.next = node;
+    return node.value;
+  }
+
+  getCycleLength() {
+    let slow = this.head;
+    let fast = this.head;
+
+    let length = 0;
+
+    while (slow && fast.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+
+      if (slow == fast) {
+        break;
+      }
+    }
+
+    do {
+      slow = slow.next;
+      length++;
+    } while (fast != slow);
+
+    return length;
+  }
+
+  hasCycle() {
+    let slow = this.head;
+    let fast = this.head;
+
+    while (slow && fast) {
+      slow = slow.next;
+      fast = fast?.next?.next;
+      if (slow == fast) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   static mergeTwoSortedLinkedList(list1, list2) {
     const list = new LinkedList();
 
