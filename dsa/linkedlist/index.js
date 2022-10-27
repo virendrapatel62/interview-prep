@@ -33,6 +33,8 @@ list2.insertMany(2, 4, 6, 8, 10, 14, 15, 16, 17).display();
 
 LinkedList.mergeTwoSortedLinkedList(list1, list2).display();
 
+list1.display();
+
 const cycleList = new LinkedList();
 cycleList.insertMany(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
@@ -43,5 +45,9 @@ console.log({
 });
 console.log(cycleList.hasCycle());
 console.log({
-  cycleLength: cycleList.getCycleLength(),
+  cycleLengthhh: list1.getCycleLength(),
+});
+
+console.log({
+  cycleStartNodeValue: cycleList.getCycleStartNode(),
 });

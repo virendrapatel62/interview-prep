@@ -127,17 +127,41 @@ class LinkedList {
       slow = slow.next;
       fast = fast.next.next;
 
+      if (!fast) return 0;
+
       if (slow == fast) {
         break;
       }
     }
+
+    if (!slow || !fast.next) return 0;
 
     do {
       slow = slow.next;
       length++;
     } while (fast != slow);
 
+    console.log("returning...");
     return length;
+  }
+
+  getCycleStartNode() {
+    let first = this.head;
+    let second = this.head;
+    const lengthOfCycle = this.getCycleLength();
+
+    console.log({ lengthOfCycle });
+
+    for (let index = 0; index < lengthOfCycle; index++) {
+      first = first.next;
+    }
+
+    while (second != first) {
+      first = first.next;
+      second = second.next;
+    }
+
+    return first.value;
   }
 
   hasCycle() {
