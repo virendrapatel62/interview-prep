@@ -117,6 +117,11 @@ class LinkedList {
     return node.value;
   }
 
+  // apply findcycle method.
+  // fast and slow will meet at one point
+  // then move slow or fast poniter (only one)
+  // after completing a cycle thet will meet at the same point
+  // maintain count on every next step.
   getCycleLength() {
     let slow = this.head;
     let fast = this.head;
@@ -141,10 +146,13 @@ class LinkedList {
       length++;
     } while (fast != slow);
 
-    console.log("returning...");
     return length;
   }
 
+  // calculate the cycle length,
+  // move first pointer length times,
+  // then move second and first both one by one ,
+  // they will meet at start point of cycle.
   getCycleStartNode() {
     let first = this.head;
     let second = this.head;
@@ -164,6 +172,10 @@ class LinkedList {
     return first.value;
   }
 
+  // move fast by 2 step
+  // move slow by 1 step
+  // they will meet at one point of there is cycle
+  // otherwise fast or slow will meet at null;
   hasCycle() {
     let slow = this.head;
     let fast = this.head;
