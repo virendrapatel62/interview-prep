@@ -10,7 +10,6 @@ var deleteMiddle = function (head) {
 
   while (slow && fast?.next) {
     prevOfMiddle = slow;
-    console.log({ prevOfMiddle });
     slow = slow.next;
     fast = fast.next.next;
   }
@@ -18,14 +17,14 @@ var deleteMiddle = function (head) {
   if (slow) {
     prevOfMiddle.next = slow.next;
   }
+
+  if (slow == head) return null;
+
+  return head;
 };
 
 const list = new LinkedList();
-
 list.insertMany(1, 2, 3, 4);
-
 list.display();
-
-console.log(deleteMiddle(list.head));
-
+deleteMiddle(list.head);
 list.display();

@@ -8,6 +8,18 @@ class LinkedListNode {
     this.prev = null;
   }
 
+  display() {
+    let node = this;
+    let list = ``;
+    while (node) {
+      list += node.data + "=>";
+      node = node.next;
+    }
+
+    console.log(list + "END");
+    return this;
+  }
+
   get value() {
     return this.data;
   }
